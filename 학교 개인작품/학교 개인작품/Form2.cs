@@ -46,7 +46,6 @@ namespace 학교_개인작품
             int menuItemCount = GetMenuItemCount(hMenu);
             RemoveMenu(hMenu, menuItemCount - 1, MF_BYPOSITION);
             label4.Hide();
-            button4.Hide();
             label3.Hide();
             button1.Hide();
             button2.Hide();
@@ -65,6 +64,7 @@ namespace 학교_개인작품
             { goto b; }
             goto a;
         b:
+            button1.Select();
             sw.Start();
             button6.Hide();
             pictureBox1.Show();
@@ -346,12 +346,12 @@ namespace 학교_개인작품
             label2.Text = "남은기회:" + op.ToString();
             label3.Text = "현재 점수:" + score.ToString();
             await Task.Delay(100);
-            if (op == 5) { pictureBox1.Image = Image.FromFile(@"C:\Program Files (x86)\칠성\사칙연산\사진\5개.png"); }
-            if (op == 4) { pictureBox1.Image = Image.FromFile(@"C:\Program Files (x86)\칠성\사칙연산\사진\4개.png"); }
-            if (op == 3) { pictureBox1.Image = Image.FromFile(@"C:\Program Files (x86)\칠성\사칙연산\사진\3개.png"); }
-            if (op == 2) { pictureBox1.Image = Image.FromFile(@"C:\Program Files (x86)\칠성\사칙연산\사진\2개.png"); }
-            if (op == 1) { pictureBox1.Image = Image.FromFile(@"C:\Program Files (x86)\칠성\사칙연산\사진\1개.png"); }
-            if (op <= 0) { goto d; }
+            if (op == 5) { pictureBox1.Image = Image.FromFile("사진/5개.png"); }
+            else if (op == 4) { pictureBox1.Image = Image.FromFile("사진/4개.png"); }
+            else if (op == 3) { pictureBox1.Image = Image.FromFile("사진/3개.png"); }
+            else if (op == 2) { pictureBox1.Image = Image.FromFile("사진/2개.png"); }
+            else if (op == 1) { pictureBox1.Image = Image.FromFile("사진/1개.png"); }
+            else { goto d; }
             goto c;
         d:
             Hide();
@@ -385,14 +385,21 @@ namespace 학교_개인작품
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button1click();
+        }
+        private void button1click()
+        {
             checkBox1.Text = button1.Text;
             checkBox1.Checked = true;
             checkBox2.Checked = false;
             checkBox3.Checked = false;
             count = 0.1m;
         }
-
         private void button2_Click(object sender, EventArgs e)
+        {
+            button2click();
+        }
+        private void button2click()
         {
             checkBox2.Text = button2.Text;
             checkBox2.Checked = true;
@@ -400,22 +407,18 @@ namespace 학교_개인작품
             checkBox1.Checked = false;
             count = 0.1m;
         }
-
         private void button3_Click(object sender, EventArgs e)
+        {
+            button3click();
+        }
+        private void button3click()
         {
             checkBox3.Text = button3.Text;
             checkBox3.Checked = true;
             checkBox1.Checked = false;
             checkBox2.Checked = false;
             count = 0.1m;
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        
+        }       
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -426,6 +429,44 @@ namespace 학교_개인작품
         {
             op = 0;
             count = 0.1m;
+        }
+
+        private void Form2_KeyDown(object sender, KeyEventArgs e)
+        {
+            key(e);
+        }
+        private void key(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.NumPad1 || e.KeyCode == Keys.D1)
+            {
+                button1click();
+                button1.Select();
+            }
+            else if (e.KeyCode == Keys.NumPad2 || e.KeyCode == Keys.D2)
+            {
+                button2click();
+                button2.Select();
+            }
+            else if (e.KeyCode == Keys.NumPad3 || e.KeyCode == Keys.D3)
+            {
+                button3click();
+                button3.Select();
+            }
+        }
+
+        private void Button1_KeyDown(object sender, KeyEventArgs e)
+        {
+            key(e);
+        }
+
+        private void Button2_KeyDown(object sender, KeyEventArgs e)
+        {
+            key(e);
+        }
+
+        private void Button3_KeyDown(object sender, KeyEventArgs e)
+        {
+            key(e);
         }
     }
 }
